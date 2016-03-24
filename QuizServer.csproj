@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
+    <ProjectGuid>{9BCE3A05-BEEC-47B1-B5FA-D9F5AFE3D7DD}</ProjectGuid>
+    <OutputType>Exe</OutputType>
+    <RootNamespace>Samura.QuizServer</RootNamespace>
+    <AssemblyName>QuizServer</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug</OutputPath>
+    <DefineConstants>DEBUG;</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Externalconsole>true</Externalconsole>
+    <PlatformTarget>x86</PlatformTarget>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x86' ">
+    <DebugType>full</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release</OutputPath>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Externalconsole>true</Externalconsole>
+    <PlatformTarget>x86</PlatformTarget>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="Ninject">
+      <HintPath>packages\Ninject.3.2.2.0\lib\net45-full\Ninject.dll</HintPath>
+    </Reference>
+    <Reference Include="NLog">
+      <HintPath>packages\NLog.4.2.3\lib\net45\NLog.dll</HintPath>
+    </Reference>
+    <Reference Include="log4net">
+      <HintPath>packages\log4net.2.0.3\lib\net40-full\log4net.dll</HintPath>
+    </Reference>
+    <Reference Include="SuperSocket.Common">
+      <HintPath>packages\SuperSocket.1.6.6\lib\net45\SuperSocket.Common.dll</HintPath>
+    </Reference>
+    <Reference Include="SuperSocket.SocketBase">
+      <HintPath>packages\SuperSocket.1.6.6\lib\net45\SuperSocket.SocketBase.dll</HintPath>
+    </Reference>
+    <Reference Include="SuperSocket.Facility">
+      <HintPath>packages\SuperSocket.1.6.6\lib\net45\SuperSocket.Facility.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Configuration" />
+    <Reference Include="SuperSocket.WebSocket">
+      <HintPath>packages\SuperSocket.WebSocket.1.6.6\lib\net45\SuperSocket.WebSocket.dll</HintPath>
+    </Reference>
+    <Reference Include="SuperSocket.SocketEngine">
+      <HintPath>packages\SuperSocket.Engine.1.6.6\lib\net45\SuperSocket.SocketEngine.dll</HintPath>
+    </Reference>
+    <Reference Include="SuperSocket.SocketService">
+      <HintPath>packages\SuperSocket.Engine.1.6.6\lib\net45\SuperSocket.SocketService.exe</HintPath>
+    </Reference>
+    <Reference Include="Dapper">
+      <HintPath>packages\Dapper.1.42\lib\net45\Dapper.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="MVCExpress\MainCore.cs" />
+    <Compile Include="MVCExpress\Command\ICommand.cs" />
+    <Compile Include="Core\Command\ApplicationStartCommand.cs" />
+    <Compile Include="MVCExpress\Command\Command.cs" />
+    <Compile Include="MVCExpress\Command\CommandInvoker.cs" />
+    <Compile Include="Core\CommandType.cs" />
+    <Compile Include="Core\Service\WebSocketService.cs" />
+    <Compile Include="Core\Service\IHttpService.cs" />
+    <Compile Include="Core\Service\HttpService.cs" />
+    <Compile Include="Core\Controller\PlayerManager.cs" />
+    <Compile Include="Core\Model\Player.cs" />
+    <Compile Include="Core\Database\LocalDBManager.cs" />
+    <Compile Include="Core\Database\DBManager.cs" />
+    <Compile Include="Core\Database\IDBManager.cs" />
+    <Compile Include="Utils\TimerManager.cs" />
+    <Compile Include="Utils\Signal\impl\BaseSignal.cs" />
+    <Compile Include="Utils\Signal\impl\Signal.cs" />
+    <Compile Include="Utils\Signal\impl\SignalException.cs" />
+    <Compile Include="Utils\Signal\api\IBaseSignal.cs" />
+    <Compile Include="Utils\Signal\api\SignalExceptionType.cs" />
+    <Compile Include="MVCExpress\Controller\Controller.cs" />
+    <Compile Include="MVCExpress\Notifier.cs" />
+    <Compile Include="Core\MainModule.cs" />
+    <Compile Include="Core\ServerConfig.cs" />
+    <Compile Include="Core\Service\ISocketService.cs" />
+    <Compile Include="Core\Controller\ServerSocketController.cs" />
+    <Compile Include="Core\Controller\ApplicationManager.cs" />
+    <Compile Include="Core\Controller\RoomManager.cs" />
+    <Compile Include="Core\Controller\GameController.cs" />
+  </ItemGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <ItemGroup>
+    <None Include="packages.config" />
+    <None Include="App.config" />
+    <None Include="Utils\Signal\impl\BaseSignal.cs.meta" />
+    <None Include="Utils\Signal\impl\Signal.cs.meta" />
+    <None Include="Utils\Signal\impl\SignalException.cs.meta" />
+    <None Include="Utils\Signal\api\IBaseSignal.cs.meta" />
+    <None Include="Utils\Signal\api\SignalExceptionType.cs.meta" />
+    <None Include="Config\log4net.config" />
+    <None Include="Config\log4net.unix.config" />
+    <None Include="supersocket.cmd" />
+    <None Include="supersocket.sh" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="MVCExpress\" />
+    <Folder Include="MVCExpress\Command\" />
+    <Folder Include="Core\" />
+    <Folder Include="Core\Command\" />
+    <Folder Include="Core\Service\" />
+    <Folder Include="Core\Model\" />
+    <Folder Include="Core\Controller\" />
+    <Folder Include="Core\Database\" />
+    <Folder Include="Utils\" />
+    <Folder Include="Utils\Signal\" />
+    <Folder Include="Utils\Signal\impl\" />
+    <Folder Include="Utils\Signal\api\" />
+    <Folder Include="MVCExpress\Controller\" />
+  </ItemGroup>
+</Project>
